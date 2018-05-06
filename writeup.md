@@ -93,9 +93,11 @@ I used sliding window method to position the lane-line pixels(`sliding_window` f
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-The code for this part is in `./line_utils.py, line 206-219`
+The code for finding the curvature is in `./line_utils.py, line 206-219`. I did this by utilising the math equation for calculating the curvature.
 
-I did this by utilising the math equation for calculating the curvature.
+The code for calculating the offset is in `./Pipeline.ipynb line 439 - 440`
+
+
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 

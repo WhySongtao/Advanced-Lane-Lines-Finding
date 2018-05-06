@@ -435,6 +435,9 @@ def pipeline(img, objpoints, imgpoints, left_lines, right_lines, sanity_fail_cou
             right_poly_para = last_right_line.current_fit
         else:
             sanity_fail_count[0] = 0
+            
+    xm_per_pix = 3.7/700   
+    offset = (right_poly[0] - left_poly[0]) / 2 * xm_per_pix
 
     left_line = Line()
     right_line = Line()
@@ -452,6 +455,8 @@ def pipeline(img, objpoints, imgpoints, left_lines, right_lines, sanity_fail_cou
     right_lines.append(right_line)
     # Draw green polygon on the image.
     final = draw(warped, left_poly, right_poly, plot_y, img)
+    cv2.putText(final, "Curvature: " + str(round(curvatures[0], 3)) + " m", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+    cv2.putText(final, "Offset: " + str(round(offset, 3)) + " m", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     
     return final
 

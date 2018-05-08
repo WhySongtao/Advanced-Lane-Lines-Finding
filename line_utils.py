@@ -435,9 +435,12 @@ def pipeline(img, objpoints, imgpoints, left_lines, right_lines, sanity_fail_cou
             right_poly_para = last_right_line.current_fit
         else:
             sanity_fail_count[0] = 0
-            
-    xm_per_pix = 3.7/700   
-    offset = (right_poly[0] - left_poly[0]) / 2 * xm_per_pix
+    # Calculate the offset.        
+    xm_per_pix = 3.7/700
+    # (right x coordinate - left x coornidate) / 2 * (conversion from pixel to metre)
+    lane_centre = (np.min(left_poly) + np.min(right_poly)) / 2 * xm_per_pix
+    car_centre = img.shape[1] / 2 * xm_per_pix
+    offset = np.abs(lane_centre - car_centre)
 
     left_line = Line()
     right_line = Line()
